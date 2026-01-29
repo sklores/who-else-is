@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import PostCard, { Post } from './components/PostCard'
+import PostCard from './components/PostCard'
+import type { Post } from './components/PostCard'
 
 interface SearchBarProps {
   value: string
