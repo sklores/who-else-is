@@ -28,20 +28,11 @@ function PostCard({ post }: PostCardProps) {
     <article>
       <h2>{post.name}</h2>
       <p>{post.text}</p>
-      <p>Iam count: {iamCount}</p>
+      <p>I ams: {iamCount}</p>
       <button
         type="button"
         onClick={handleClick}
         disabled={hasAcknowledged}
-        style={{
-          padding: '6px 12px',
-          borderRadius: '6px',
-          border: '1px solid currentColor',
-          background: hasAcknowledged ? 'transparent' : 'currentColor',
-          color: hasAcknowledged ? 'inherit' : '#fff',
-          opacity: hasAcknowledged ? 0.6 : 1,
-          cursor: hasAcknowledged ? 'default' : 'pointer',
-        }}
       >
         I am
       </button>
