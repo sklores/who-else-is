@@ -87,7 +87,12 @@ function App() {
 
   return (
     <main>
-      <SearchBar value={query} onChange={setQuery} />
+      <header className="site-header">
+        <h1>Who Else Is?</h1>
+        <div className="search-panel">
+          <SearchBar value={query} onChange={setQuery} />
+        </div>
+      </header>
       <Feed posts={filteredPosts} />
     </main>
   )
