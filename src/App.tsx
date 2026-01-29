@@ -54,13 +54,12 @@ const posts: Post[] = [
 function SearchBar({ value, onChange }: SearchBarProps) {
   return (
     <div>
-      <label htmlFor="search">Search the feed</label>
       <input
         id="search"
         type="search"
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Search by activity"
+        placeholder="who else is…"
       />
     </div>
   )

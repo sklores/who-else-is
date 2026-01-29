@@ -34,23 +34,22 @@ main > div + div {
   gap: 32px;
 }
 
-label {
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
 input[type='search'] {
   font: inherit;
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text-h);
   background: transparent;
-  padding: 12px 0;
+  padding: 6px 0;
   border: none;
   outline: none;
-  border-bottom: 1px solid var(--border);
+}
+
+input[type='search']::placeholder {
+  color: var(--text);
+}
+
+input[type='search']:focus::placeholder {
+  color: transparent;
 }
 
 article {
