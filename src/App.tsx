@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import PostCard, { Post } from './components/PostCard'
 
-type SearchBarProps = {
+interface SearchBarProps {
   value: string
   onChange: (value: string) => void
 }
@@ -70,90 +70,6 @@ function Feed({ posts }: FeedProps) {
     <div>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
-      ))}
-    </div>
-  )
-}
-
-type Post = {
-  id: string
-  name: string
-  text: string
-  iamCount: number
-}
-
-type SearchBarProps = {
-  value: string
-  onChange: (value: string) => void
-}
-
-type FeedProps = {
-  posts: Post[]
-}
-
-const posts: Post[] = [
-  {
-    id: '1',
-    name: 'Nova',
-    text: 'Sketching the layout for our next product page.',
-    iamCount: 34,
-  },
-  {
-    id: '2',
-    name: 'Mateo',
-    text: 'Deep in a customer interview about onboarding.',
-    iamCount: 21,
-  },
-  {
-    id: '3',
-    name: 'Priya',
-    text: 'Refining the release checklist before launch.',
-    iamCount: 41,
-  },
-  {
-    id: '4',
-    name: 'Jordan',
-    text: 'Watching analytics spike after the email blast.',
-    iamCount: 18,
-  },
-  {
-    id: '5',
-    name: 'Harper',
-    text: 'Drafting copy for the new community update.',
-    iamCount: 29,
-  },
-  {
-    id: '6',
-    name: 'Sasha',
-    text: 'Testing the new checkout flow in staging.',
-    iamCount: 25,
-  },
-]
-
-function SearchBar({ value, onChange }: SearchBarProps) {
-  return (
-    <div>
-      <label htmlFor="search">Search the feed</label>
-      <input
-        id="search"
-        type="search"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="Search by activity"
-      />
-    </div>
-  )
-}
-
-function Feed({ posts }: FeedProps) {
-  return (
-    <div>
-      {posts.map((post) => (
-        <article key={post.id}>
-          <h2>{post.name}</h2>
-          <p>{post.text}</p>
-          <p>Iam count: {post.iamCount}</p>
-        </article>
       ))}
     </div>
   )
