@@ -1451,13 +1451,11 @@ function App() {
   const [query, setQuery] = useState('')
   const [viewStyle, setViewStyle] = useState('whoelseis')
   const [posts, setPosts] = useState<Post[]>(initialPosts)
-  const [backgroundColor, setBackgroundColor] = useState('Sand')
-  const [backgroundSpecialty, setBackgroundSpecialty] = useState('None')
+  const [background, setBackground] = useState('Sand')
 
   useEffect(() => {
     if (viewStyle !== 'whoelseis') {
-      setBackgroundColor('Sand')
-      setBackgroundSpecialty('None')
+      setBackground('Sand')
     }
   }, [viewStyle])
 
@@ -1495,9 +1493,7 @@ function App() {
 
   const backgroundClass =
     viewStyle === 'whoelseis'
-      ? backgroundSpecialty !== 'None'
-        ? `bg-specialty-${backgroundSpecialty.toLowerCase()}`
-        : `bg-color-${backgroundColor.toLowerCase()}`
+      ? `bg-${background.toLowerCase().replace(/\\s+/g, '-')}`
       : ''
 
   return (
@@ -1529,34 +1525,24 @@ function App() {
         {viewStyle === 'whoelseis' ? (
           <div className="background-controls">
             <label>
-              Background color
+              Background
               <select
-                value={backgroundColor}
-                onChange={(event) => setBackgroundColor(event.target.value)}
+                value={background}
+                onChange={(event) => setBackground(event.target.value)}
               >
                 <option value="Sand">Sand</option>
                 <option value="Sage">Sage</option>
-                <option value="Charcoal">Charcoal</option>
                 <option value="Cloud">Cloud</option>
                 <option value="Blush">Blush</option>
+                <option value="Charcoal">Charcoal</option>
                 <option value="Taupe">Taupe</option>
-              </select>
-            </label>
-            <label>
-              Specialty background
-              <select
-                value={backgroundSpecialty}
-                onChange={(event) =>
-                  setBackgroundSpecialty(event.target.value)
-                }
-              >
-                <option value="None">None</option>
                 <option value="Space">Space</option>
+                <option value="Ocean">Ocean</option>
                 <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
                 <option value="Zebra">Zebra</option>
                 <option value="Cheetah">Cheetah</option>
-                <option value="Platinum">Platinum</option>
-                <option value="Ocean">Ocean</option>
+                <option value="Mystery Box">Mystery Box</option>
               </select>
             </label>
           </div>
