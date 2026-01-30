@@ -4,6 +4,7 @@ type Post = {
   id: string
   name: string
   text: string
+  time: string
   iamCount: number
 }
 
@@ -28,7 +29,10 @@ function PostCard({ post }: PostCardProps) {
     <article>
       <h2>{post.name}</h2>
       <p>{post.text}</p>
-      <p>I ams: {iamCount}</p>
+      <p className="post-meta">
+        <span>{post.time}</span>
+        <span>I also be {iamCount}</span>
+      </p>
       <button
         type="button"
         onClick={handleClick}

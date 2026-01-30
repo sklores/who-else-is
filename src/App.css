@@ -74,6 +74,13 @@ article p:last-of-type {
   color: var(--text);
 }
 
+.post-meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 article button {
   align-self: flex-start;
   font: inherit;
