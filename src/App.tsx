@@ -1419,20 +1419,20 @@ const initialPosts: Post[] = [
 function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
   return (
     <div>
-      <input
-        id="search"
-        type="search"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="who else is…"
-      />
-      {value.trim() ? (
-        <div className="composer-actions">
-          <button type="button" onClick={onCreate}>
+      <div className="composer-row">
+        <input
+          id="search"
+          type="search"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="who else is…"
+        />
+        {value.trim() ? (
+          <button type="button" className="composer-button" onClick={onCreate}>
             I be
           </button>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   )
 }
@@ -1440,7 +1440,7 @@ function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
 function Feed({ posts }: FeedProps) {
   return (
     <div>
-      {posts.map((post) => (
+      {posts.slice(0, 8).map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
     </div>
