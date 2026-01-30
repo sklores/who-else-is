@@ -1425,7 +1425,7 @@ function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
           type="search"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="who else is…"
+          placeholder="who else be…"
         />
         {value.trim() ? (
           <button type="button" className="composer-button" onClick={onCreate}>
@@ -1488,7 +1488,7 @@ function App() {
     <div className={`style-${viewStyle}`}>
       <main>
         <header className="site-header">
-          <h1>Who Else Is?</h1>
+          <h1>Who Else Be?</h1>
           <div className="search-panel">
           <SearchBar
             value={query}
@@ -1503,7 +1503,7 @@ function App() {
             value={viewStyle}
             onChange={(event) => setViewStyle(event.target.value)}
           >
-            <option value="whoelseis">Who Else Is</option>
+            <option value="whoelseis">Who Else Be</option>
             <option value="myspace">MySpace</option>
             <option value="facebook">Facebook</option>
             <option value="reddit">Reddit</option>
