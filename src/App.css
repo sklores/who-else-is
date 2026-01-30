@@ -600,8 +600,7 @@ article button:focus-visible {
 @media (max-width: 768px) {
   main {
     padding: 12px 10px 20px;
-    background: color-mix(in srgb, var(--panel-bg) 78%, transparent);
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.85);
   }
 
   .style-facebook main,
@@ -609,8 +608,7 @@ article button:focus-visible {
   .style-whoelseis main,
   .style-myspace main,
   .style-princess main {
-    background: color-mix(in srgb, var(--panel-bg) 78%, transparent);
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.85);
   }
 
   .site-header h1 {
@@ -622,6 +620,6 @@ article button:focus-visible {
   }
 
   article {
-    background: color-mix(in srgb, var(--panel-bg) 70%, transparent);
+    background-color: transparent;
   }
 }
