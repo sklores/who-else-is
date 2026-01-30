@@ -83,6 +83,7 @@ function Feed({ posts }: FeedProps) {
 
 function App() {
   const [query, setQuery] = useState('')
+  const [viewStyle, setViewStyle] = useState('myspace')
 
   const filteredPosts = query
     ? posts.filter((post) =>
@@ -91,15 +92,28 @@ function App() {
     : [...posts].sort((a, b) => b.iamCount - a.iamCount)
 
   return (
-    <main>
-      <header className="site-header">
-        <h1>Who Else Is?</h1>
-        <div className="search-panel">
-          <SearchBar value={query} onChange={setQuery} />
+    <div className={`style-${viewStyle}`}>
+      <main>
+        <header className="site-header">
+          <h1>Who Else Is?</h1>
+          <div className="search-panel">
+            <SearchBar value={query} onChange={setQuery} />
+          </div>
+        </header>
+        <Feed posts={filteredPosts} />
+        <div className="view-selector">
+          <select
+            value={viewStyle}
+            onChange={(event) => setViewStyle(event.target.value)}
+          >
+            <option value="myspace">MySpace</option>
+            <option value="facebook">Facebook</option>
+            <option value="reddit">Reddit</option>
+            <option value="princess">Princess</option>
+          </select>
         </div>
-      </header>
-      <Feed posts={filteredPosts} />
-    </main>
+      </main>
+    </div>
   )
 }
 

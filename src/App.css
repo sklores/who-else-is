@@ -6,7 +6,7 @@ main {
   flex-direction: column;
   gap: 16px;
   text-align: left;
-  background: #ffffff;
+  background: var(--panel-bg);
   border: 1px solid var(--border);
 }
 
@@ -28,7 +28,7 @@ main > header {
 }
 
 .search-panel {
-  background: #f8f8f8;
+  background: var(--panel-accent);
   padding: 10px;
   border: 1px solid var(--border);
 }
@@ -61,7 +61,7 @@ article {
   gap: 6px;
   padding: 10px;
   border: 1px solid var(--border);
-  background: #ffffff;
+  background: var(--panel-bg);
 }
 
 article h2 {
@@ -109,6 +109,84 @@ article button:disabled {
 article button:focus-visible {
   outline: 1px solid var(--accent);
   outline-offset: 1px;
+}
+
+.view-selector {
+  margin-top: 4px;
+}
+
+.view-selector select {
+  font: inherit;
+  font-size: 12px;
+  background: var(--panel-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+}
+
+.style-myspace {
+  --page-bg: #dde3ea;
+  --panel-bg: #ffffff;
+  --panel-accent: #f8f8f8;
+  --text: #222;
+  --text-h: #111;
+  --border: #999;
+  --accent: #3366cc;
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.style-facebook {
+  --page-bg: #f1f5fb;
+  --panel-bg: #ffffff;
+  --panel-accent: #f4f6fb;
+  --text: #222;
+  --text-h: #111;
+  --border: #c4c8d4;
+  --accent: #003399;
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.style-reddit {
+  --page-bg: #121212;
+  --panel-bg: #111111;
+  --panel-accent: #151515;
+  --text: #eeeeee;
+  --text-h: #ffffff;
+  --border: #444444;
+  --accent: #4a7bd9;
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.style-princess {
+  --page-bg: #f7dfe9;
+  --panel-bg: #fff7fb;
+  --panel-accent: #ffeaf4;
+  --text: #4a2b3c;
+  --text-h: #3a1f2d;
+  --border: #d8a3ba;
+  --accent: #cc6699;
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.style-myspace,
+.style-facebook,
+.style-reddit,
+.style-princess {
+  background: var(--page-bg);
+  color: var(--text);
+  min-height: 100svh;
+  padding: 16px 0;
+}
+
+.style-princess,
+.style-princess .search-panel,
+.style-princess article,
+.style-princess .view-selector select {
+  border-radius: 6px;
 }
 
 @media (max-width: 720px) {
