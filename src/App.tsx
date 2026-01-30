@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import PostCard from './components/PostCard'
 import type { Post } from './components/PostCard'
@@ -7,6 +7,8 @@ interface SearchBarProps {
   value: string
   onChange: (value: string) => void
   onCreate: () => void
+  onFocus: () => void
+  onBlur: () => void
 }
 
 type FeedProps = {
@@ -363,7 +365,7 @@ const loadUserPosts = (): Post[] => {
   }
 }
 
-function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
+function SearchBar({ value, onChange, onCreate, onFocus, onBlur }: SearchBarProps) {
   return (
     <div>
       <div className="composer-row">
@@ -371,6 +373,8 @@ function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
           id="search"
           type="search"
           value={value}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={(event) => onChange(event.target.value)}
           placeholder="who else be…"
         />
@@ -402,7 +406,11 @@ function App() {
     ...loadUserPosts(),
     ...fakePosts,
   ])
+  const [isSearchFocused, setIsSearchFocused] = useState(false)
   const [background, setBackground] = useState('Sand')
+  const bumpIntervalIndex = useRef(0)
+  const bumpTimeoutId = useRef<number | null>(null)
+  const bumpCursor = useRef(0)
 
   useEffect(() => {
     if (viewStyle !== 'whoelseis') {
@@ -417,6 +425,57 @@ function App() {
     const userPosts = posts.filter((post) => post.isUser)
     localStorage.setItem(userPostStorageKey, JSON.stringify(userPosts))
   }, [posts])
+
+  useEffect(() => {
+    const sequence = [7000, 28000, 3000, 9000, 18000, 11000]
+
+    if (isSearchFocused || query.trim()) {
+      if (bumpTimeoutId.current !== null) {
+        window.clearTimeout(bumpTimeoutId.current)
+        bumpTimeoutId.current = null
+      }
+      return
+    }
+
+    const scheduleNext = () => {
+      const delay = sequence[bumpIntervalIndex.current % sequence.length]
+      bumpTimeoutId.current = window.setTimeout(() => {
+        setPosts((prevPosts) => {
+          const fakeIndexes = prevPosts
+            .map((post, index) => (!post.isUser ? index : -1))
+            .filter((index) => index !== -1)
+          if (fakeIndexes.length === 0) {
+            return prevPosts
+          }
+          const targetIndex =
+            fakeIndexes[bumpCursor.current % fakeIndexes.length]
+          bumpCursor.current += 1
+          const targetPost = prevPosts[targetIndex]
+          const updatedPost = {
+            ...targetPost,
+            time: 'just now',
+            createdAt: Date.now(),
+          }
+          return [
+            updatedPost,
+            ...prevPosts.slice(0, targetIndex),
+            ...prevPosts.slice(targetIndex + 1),
+          ]
+        })
+        bumpIntervalIndex.current += 1
+        scheduleNext()
+      }, delay)
+    }
+
+    scheduleNext()
+
+    return () => {
+      if (bumpTimeoutId.current !== null) {
+        window.clearTimeout(bumpTimeoutId.current)
+        bumpTimeoutId.current = null
+      }
+    }
+  }, [isSearchFocused, query])
 
   const handleCreatePost = () => {
     const trimmed = query.trim()
@@ -466,6 +525,8 @@ function App() {
             value={query}
             onChange={setQuery}
             onCreate={handleCreatePost}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setIsSearchFocused(false)}
           />
           </div>
         </header>
