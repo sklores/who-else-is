@@ -6,6 +6,7 @@ type Post = {
   text: string
   time: string
   iamCount: number
+  createdAt?: number
 }
 
 type PostCardProps = {
