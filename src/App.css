@@ -55,6 +55,22 @@ input[type='search']:focus::placeholder {
   color: transparent;
 }
 
+.composer-actions {
+  margin-top: 6px;
+}
+
+.composer-actions button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
 article {
   display: flex;
   flex-direction: column;
