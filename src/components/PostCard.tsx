@@ -7,6 +7,7 @@ type Post = {
   time: string
   iamCount: number
   createdAt?: number
+  isUser?: boolean
 }
 
 type PostCardProps = {
