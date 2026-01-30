@@ -193,16 +193,79 @@ article button:focus-visible {
 
 .style-reddit {
   --page-bg: #121212;
-  --panel-bg: #111111;
-  --panel-accent: #151515;
-  --text: #eeeeee;
-  --text-h: #ffffff;
-  --border: #444444;
+  --panel-bg: #121212;
+  --panel-accent: #121212;
+  --text: #d0d0d0;
+  --text-h: #e2e2e2;
+  --border: #2a2a2a;
   --accent: #4a7bd9;
-  font-family: Verdana, Tahoma, Arial, sans-serif;
-  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
+.style-reddit main {
+  background: var(--page-bg);
+  border: 1px solid var(--border);
+}
+
+.style-reddit .site-header h1 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.style-reddit .search-panel {
+  background: var(--page-bg);
+  border: 1px solid var(--border);
+  padding: 6px;
+}
+
+.style-reddit input[type='search'] {
+  font-size: 12px;
+  padding: 2px 4px;
+  border: 1px solid var(--border);
+}
+
+.style-reddit article {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 4px 8px;
+  gap: 4px;
+  background: transparent;
+}
+
+.style-reddit article:last-of-type {
+  border-bottom: none;
+}
+
+.style-reddit article h2 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.style-reddit article p:first-of-type {
+  font-size: 12px;
+}
+
+.style-reddit article p:last-of-type {
+  font-size: 11px;
+}
+
+.style-reddit .post-meta {
+  gap: 8px;
+}
+
+.style-reddit article button {
+  color: #4a7bd9;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.style-reddit main > div + div {
+  gap: 6px;
+}
 .style-princess {
   --page-bg: #ff7ab8;
   --panel-bg: #fff0f7;
