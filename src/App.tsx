@@ -441,25 +441,24 @@ function App() {
       const delay = sequence[bumpIntervalIndex.current % sequence.length]
       bumpTimeoutId.current = window.setTimeout(() => {
         setPosts((prevPosts) => {
-          const fakeIndexes = prevPosts
-            .map((post, index) => (!post.isUser ? index : -1))
-            .filter((index) => index !== -1)
-          if (fakeIndexes.length === 0) {
+          const userPosts = prevPosts.filter((post) => post.isUser)
+          const fakePosts = prevPosts.filter((post) => !post.isUser)
+          if (fakePosts.length === 0) {
             return prevPosts
           }
-          const targetIndex =
-            fakeIndexes[bumpCursor.current % fakeIndexes.length]
+          const targetIndex = bumpCursor.current % fakePosts.length
           bumpCursor.current += 1
-          const targetPost = prevPosts[targetIndex]
+          const targetPost = fakePosts[targetIndex]
           const updatedPost = {
             ...targetPost,
             time: 'just now',
             createdAt: Date.now(),
           }
           return [
+            ...userPosts,
             updatedPost,
-            ...prevPosts.slice(0, targetIndex),
-            ...prevPosts.slice(targetIndex + 1),
+            ...fakePosts.slice(0, targetIndex),
+            ...fakePosts.slice(targetIndex + 1),
           ]
         })
         bumpIntervalIndex.current += 1
@@ -502,6 +501,12 @@ function App() {
         post.text.toLowerCase().includes(query.toLowerCase())
       )
     : [...posts].sort((a, b) => {
+        if (a.isUser && !b.isUser) {
+          return -1
+        }
+        if (!a.isUser && b.isUser) {
+          return 1
+        }
         const recencyDifference = (b.createdAt ?? 0) - (a.createdAt ?? 0)
         if (recencyDifference !== 0) {
           return recencyDifference
@@ -557,13 +562,9 @@ function App() {
                 <option value="Blush">Blush</option>
                 <option value="Charcoal">Charcoal</option>
                 <option value="Taupe">Taupe</option>
-                <option value="Space">Space</option>
-                <option value="Ocean">Ocean</option>
                 <option value="Gold">Gold</option>
                 <option value="Platinum">Platinum</option>
                 <option value="Zebra">Zebra</option>
-                <option value="Cheetah">Cheetah</option>
-                <option value="Mystery Box">Mystery Box</option>
               </select>
             </label>
           </div>
