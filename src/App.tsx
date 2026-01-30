@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import PostCard from './components/PostCard'
 import type { Post } from './components/PostCard'
@@ -1451,6 +1451,15 @@ function App() {
   const [query, setQuery] = useState('')
   const [viewStyle, setViewStyle] = useState('whoelseis')
   const [posts, setPosts] = useState<Post[]>(initialPosts)
+  const [backgroundColor, setBackgroundColor] = useState('Sand')
+  const [backgroundSpecialty, setBackgroundSpecialty] = useState('None')
+
+  useEffect(() => {
+    if (viewStyle !== 'whoelseis') {
+      setBackgroundColor('Sand')
+      setBackgroundSpecialty('None')
+    }
+  }, [viewStyle])
 
   const handleCreatePost = () => {
     const trimmed = query.trim()
@@ -1484,8 +1493,15 @@ function App() {
         return b.iamCount - a.iamCount
       })
 
+  const backgroundClass =
+    viewStyle === 'whoelseis'
+      ? backgroundSpecialty !== 'None'
+        ? `bg-specialty-${backgroundSpecialty.toLowerCase()}`
+        : `bg-color-${backgroundColor.toLowerCase()}`
+      : ''
+
   return (
-    <div className={`style-${viewStyle}`}>
+    <div className={`style-${viewStyle} ${backgroundClass}`.trim()}>
       <main>
         <header className="site-header">
           <h1>Who Else Be?</h1>
@@ -1510,6 +1526,41 @@ function App() {
             <option value="princess">Princess</option>
           </select>
         </div>
+        {viewStyle === 'whoelseis' ? (
+          <div className="background-controls">
+            <label>
+              Background color
+              <select
+                value={backgroundColor}
+                onChange={(event) => setBackgroundColor(event.target.value)}
+              >
+                <option value="Sand">Sand</option>
+                <option value="Sage">Sage</option>
+                <option value="Charcoal">Charcoal</option>
+                <option value="Cloud">Cloud</option>
+                <option value="Blush">Blush</option>
+                <option value="Taupe">Taupe</option>
+              </select>
+            </label>
+            <label>
+              Specialty background
+              <select
+                value={backgroundSpecialty}
+                onChange={(event) =>
+                  setBackgroundSpecialty(event.target.value)
+                }
+              >
+                <option value="None">None</option>
+                <option value="Space">Space</option>
+                <option value="Gold">Gold</option>
+                <option value="Zebra">Zebra</option>
+                <option value="Cheetah">Cheetah</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Ocean">Ocean</option>
+              </select>
+            </label>
+          </div>
+        ) : null}
       </main>
     </div>
   )
