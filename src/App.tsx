@@ -1464,6 +1464,7 @@ function App() {
       text: trimmed,
       time: 'just now',
       iamCount: 1,
+      createdAt: Date.now(),
     }
 
     setPosts((prevPosts) => [newPost, ...prevPosts])
@@ -1474,7 +1475,14 @@ function App() {
     ? posts.filter((post) =>
         post.text.toLowerCase().includes(query.toLowerCase())
       )
-    : [...posts].sort((a, b) => b.iamCount - a.iamCount)
+    : [...posts].sort((a, b) => {
+        const recencyDifference = (b.createdAt ?? 0) - (a.createdAt ?? 0)
+        if (recencyDifference !== 0) {
+          return recencyDifference
+        }
+
+        return b.iamCount - a.iamCount
+      })
 
   return (
     <div className={`style-${viewStyle}`}>
