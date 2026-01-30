@@ -441,7 +441,6 @@ function App() {
       const delay = sequence[bumpIntervalIndex.current % sequence.length]
       bumpTimeoutId.current = window.setTimeout(() => {
         setPosts((prevPosts) => {
-          const userPosts = prevPosts.filter((post) => post.isUser)
           const fakePosts = prevPosts.filter((post) => !post.isUser)
           if (fakePosts.length === 0) {
             return prevPosts
@@ -454,11 +453,12 @@ function App() {
             time: 'just now',
             createdAt: Date.now(),
           }
+          const remainingPosts = prevPosts.filter(
+            (post) => post.id !== targetPost.id
+          )
           return [
-            ...userPosts,
             updatedPost,
-            ...fakePosts.slice(0, targetIndex),
-            ...fakePosts.slice(targetIndex + 1),
+            ...remainingPosts,
           ]
         })
         bumpIntervalIndex.current += 1
@@ -501,12 +501,6 @@ function App() {
         post.text.toLowerCase().includes(query.toLowerCase())
       )
     : [...posts].sort((a, b) => {
-        if (a.isUser && !b.isUser) {
-          return -1
-        }
-        if (!a.isUser && b.isUser) {
-          return 1
-        }
         const recencyDifference = (b.createdAt ?? 0) - (a.createdAt ?? 0)
         if (recencyDifference !== 0) {
           return recencyDifference
