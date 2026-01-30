@@ -33,15 +33,14 @@ function PostCard({ post }: PostCardProps) {
       <p>{post.text}</p>
       <p className="post-meta">
         <span>{post.time}</span>
-        <span>I also be {iamCount}</span>
+        <button
+          type="button"
+          onClick={handleClick}
+          disabled={hasAcknowledged}
+        >
+          I also be {iamCount}
+        </button>
       </p>
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={hasAcknowledged}
-      >
-        I am
-      </button>
     </article>
   )
 }
