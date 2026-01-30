@@ -203,15 +203,16 @@ article button:focus-visible {
 }
 
 .style-princess {
-  --page-bg: #f7dfe9;
-  --panel-bg: #fff7fb;
-  --panel-accent: #ffeaf4;
-  --text: #4a2b3c;
-  --text-h: #3a1f2d;
-  --border: #d8a3ba;
-  --accent: #cc6699;
-  font-family: Verdana, Tahoma, Arial, sans-serif;
-  font-size: 15px;
+  --page-bg: #ff7ab8;
+  --panel-bg: #fff0f7;
+  --panel-accent: #ffe0ef;
+  --text: #5a2340;
+  --text-h: #7d1f4a;
+  --border: #e06aa3;
+  --accent: #d43c8f;
+  font-family: 'Trebuchet MS', Verdana, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .style-myspace,
@@ -228,7 +229,54 @@ article button:focus-visible {
 .style-princess .search-panel,
 .style-princess article,
 .style-princess .view-selector select {
-  border-radius: 6px;
+  border-radius: 14px;
+}
+
+.style-princess main {
+  background: var(--panel-bg);
+}
+
+.style-princess .site-header h1 {
+  font-size: 40px;
+  font-weight: 600;
+  color: #d43c8f;
+}
+
+.style-princess .search-panel {
+  padding: 14px;
+}
+
+.style-princess input[type='search'] {
+  font-size: 18px;
+  padding: 6px 8px;
+  border: 2px solid var(--border);
+}
+
+.style-princess article {
+  border: 2px solid var(--border);
+  padding: 14px;
+  gap: 10px;
+}
+
+.style-princess article h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #b52874;
+}
+
+.style-princess article p:first-of-type {
+  font-size: 15px;
+}
+
+.style-princess article p:last-of-type {
+  font-size: 13px;
+}
+
+.style-princess article button {
+  color: #d43c8f;
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 @media (max-width: 720px) {
