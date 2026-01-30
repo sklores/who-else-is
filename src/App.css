@@ -137,15 +137,57 @@ article button:focus-visible {
 }
 
 .style-facebook {
-  --page-bg: #f1f5fb;
+  --page-bg: #3b5998;
   --panel-bg: #ffffff;
-  --panel-accent: #f4f6fb;
+  --panel-accent: #ffffff;
   --text: #222;
   --text-h: #111;
-  --border: #c4c8d4;
-  --accent: #003399;
-  font-family: Verdana, Tahoma, Arial, sans-serif;
-  font-size: 13px;
+  --border: #cccccc;
+  --accent: #3b5998;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.style-facebook main {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.style-facebook .site-header {
+  background: #3b5998;
+  padding: 6px 8px;
+}
+
+.style-facebook .site-header h1 {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.style-facebook .search-panel {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 8px;
+}
+
+.style-facebook article {
+  border: 1px solid #cccccc;
+}
+
+.style-facebook article h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.style-facebook input[type='search'] {
+  font-size: 14px;
+  border: 1px solid #cccccc;
+}
+
+.style-facebook .view-selector select {
+  border: 1px solid #cccccc;
 }
 
 .style-reddit {
