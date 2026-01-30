@@ -203,6 +203,69 @@ const displayNames = [
   'Elliot',
 ]
 
+const starterGroups = [
+  {
+    starter: 'eating',
+    objects: ['toast', 'leftovers', 'a snack', 'cereal', 'noodles', 'a sandwich'],
+    useLocation: true,
+  },
+  {
+    starter: 'dancing',
+    objects: ['in the kitchen', 'around my room', 'to whatever is playing'],
+    useLocation: false,
+  },
+  {
+    starter: 'wearing',
+    objects: ['the same hoodie', 'sweatpants', 'a work shirt', 'something comfy'],
+    useLocation: true,
+  },
+  {
+    starter: 'driving',
+    objects: ['home', 'to the store', 'without a plan', 'around the block'],
+    useLocation: false,
+  },
+  {
+    starter: 'going to',
+    objects: ['the store', 'pick up groceries', 'run errands', 'grab coffee'],
+    useLocation: false,
+  },
+  {
+    starter: 'hunting',
+    objects: ['for an idea', 'for motivation', 'for my keys', 'for a charger'],
+    useLocation: true,
+  },
+  {
+    starter: 'singing',
+    objects: [
+      'quietly',
+      'to myself',
+      'while doing chores',
+      'absentmindedly',
+    ],
+    useLocation: true,
+  },
+  {
+    starter: 'making',
+    objects: [
+      'a small list',
+      'progress on a task',
+      'a mess',
+      'something i do not fully understand',
+    ],
+    useLocation: true,
+  },
+  {
+    starter: 'cooking',
+    objects: [
+      'something simple',
+      'dinner for one',
+      'a basic meal',
+      'without much motivation',
+    ],
+    useLocation: false,
+  },
+]
+
 const seededValue = (index: number) => {
   const value = Math.sin(index * 138.73) * 10000
   return value - Math.floor(value)
@@ -232,6 +295,28 @@ const generateFakePosts = (): Post[] => {
         id: `fake-${postIndex}`,
         name: displayNames[postIndex % displayNames.length],
         text: `${starter} ${location} ${time} ${emotion}`,
+        time: displayTimes[postIndex % displayTimes.length],
+        iamCount: iamCountFromSeed(postIndex),
+        createdAt: 0,
+      })
+      postIndex += 1
+    }
+  })
+
+  starterGroups.forEach((group, groupIndex) => {
+    for (let variation = 0; variation < 20; variation += 1) {
+      const object = group.objects[variation % group.objects.length]
+      const location = group.useLocation
+        ? locationContexts[(groupIndex + variation) % locationContexts.length]
+        : ''
+      const time = timeContexts[(groupIndex * 4 + variation) % timeContexts.length]
+      const emotion = emotionContexts[(groupIndex * 6 + variation) % emotionContexts.length]
+      posts.push({
+        id: `fake-${postIndex}`,
+        name: displayNames[postIndex % displayNames.length],
+        text: `${group.starter} ${object} ${location} ${time} ${emotion}`
+          .replace(/\s+/g, ' ')
+          .trim(),
         time: displayTimes[postIndex % displayTimes.length],
         iamCount: iamCountFromSeed(postIndex),
         createdAt: 0,
