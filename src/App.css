@@ -279,7 +279,72 @@ article button:focus-visible {
   line-height: 1.6;
 }
 
+.style-whoelseis {
+  --page-bg: #f3f1ed;
+  --panel-bg: #fbfaf8;
+  --panel-accent: #f7f5f2;
+  --text: #2a2a2a;
+  --text-h: #1f1f1f;
+  --border: #d9d5cf;
+  --accent: #6b6b6b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.style-whoelseis main {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+}
+
+.style-whoelseis .site-header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.style-whoelseis .search-panel {
+  background: var(--panel-accent);
+  border: 1px solid var(--border);
+  padding: 12px;
+}
+
+.style-whoelseis input[type='search'] {
+  font-size: 16px;
+  border: 1px solid var(--border);
+}
+
+.style-whoelseis article {
+  border: 1px solid var(--border);
+  padding: 12px;
+  gap: 8px;
+}
+
+.style-whoelseis article h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.style-whoelseis article p:first-of-type {
+  font-size: 15px;
+}
+
+.style-whoelseis article p:last-of-type {
+  font-size: 13px;
+}
+
+.style-whoelseis article button {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.style-whoelseis main > div + div {
+  gap: 14px;
+}
+
 .style-myspace,
+.style-whoelseis,
 .style-facebook,
 .style-reddit,
 .style-princess {

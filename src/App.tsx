@@ -83,7 +83,7 @@ function Feed({ posts }: FeedProps) {
 
 function App() {
   const [query, setQuery] = useState('')
-  const [viewStyle, setViewStyle] = useState('myspace')
+  const [viewStyle, setViewStyle] = useState('whoelseis')
 
   const filteredPosts = query
     ? posts.filter((post) =>
@@ -106,6 +106,7 @@ function App() {
             value={viewStyle}
             onChange={(event) => setViewStyle(event.target.value)}
           >
+            <option value="whoelseis">Who Else Is</option>
             <option value="myspace">MySpace</option>
             <option value="facebook">Facebook</option>
             <option value="reddit">Reddit</option>
