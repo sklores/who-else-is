@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import PostCard from './components/PostCard'
 import type { Post } from './components/PostCard'
@@ -1425,7 +1425,7 @@ function SearchBar({ value, onChange, onCreate }: SearchBarProps) {
           type="search"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="who else is…"
+          placeholder="who else be…"
         />
         {value.trim() ? (
           <button type="button" className="composer-button" onClick={onCreate}>
@@ -1451,6 +1451,15 @@ function App() {
   const [query, setQuery] = useState('')
   const [viewStyle, setViewStyle] = useState('whoelseis')
   const [posts, setPosts] = useState<Post[]>(initialPosts)
+  const [backgroundColor, setBackgroundColor] = useState('Sand')
+  const [backgroundSpecialty, setBackgroundSpecialty] = useState('None')
+
+  useEffect(() => {
+    if (viewStyle !== 'whoelseis') {
+      setBackgroundColor('Sand')
+      setBackgroundSpecialty('None')
+    }
+  }, [viewStyle])
 
   const handleCreatePost = () => {
     const trimmed = query.trim()
@@ -1464,6 +1473,7 @@ function App() {
       text: trimmed,
       time: 'just now',
       iamCount: 1,
+      createdAt: Date.now(),
     }
 
     setPosts((prevPosts) => [newPost, ...prevPosts])
@@ -1474,13 +1484,27 @@ function App() {
     ? posts.filter((post) =>
         post.text.toLowerCase().includes(query.toLowerCase())
       )
-    : [...posts].sort((a, b) => b.iamCount - a.iamCount)
+    : [...posts].sort((a, b) => {
+        const recencyDifference = (b.createdAt ?? 0) - (a.createdAt ?? 0)
+        if (recencyDifference !== 0) {
+          return recencyDifference
+        }
+
+        return b.iamCount - a.iamCount
+      })
+
+  const backgroundClass =
+    viewStyle === 'whoelseis'
+      ? backgroundSpecialty !== 'None'
+        ? `bg-specialty-${backgroundSpecialty.toLowerCase()}`
+        : `bg-color-${backgroundColor.toLowerCase()}`
+      : ''
 
   return (
-    <div className={`style-${viewStyle}`}>
+    <div className={`style-${viewStyle} ${backgroundClass}`.trim()}>
       <main>
         <header className="site-header">
-          <h1>Who Else Is?</h1>
+          <h1>Who Else Be?</h1>
           <div className="search-panel">
           <SearchBar
             value={query}
@@ -1495,13 +1519,48 @@ function App() {
             value={viewStyle}
             onChange={(event) => setViewStyle(event.target.value)}
           >
-            <option value="whoelseis">Who Else Is</option>
+            <option value="whoelseis">Who Else Be</option>
             <option value="myspace">MySpace</option>
             <option value="facebook">Facebook</option>
             <option value="reddit">Reddit</option>
             <option value="princess">Princess</option>
           </select>
         </div>
+        {viewStyle === 'whoelseis' ? (
+          <div className="background-controls">
+            <label>
+              Background color
+              <select
+                value={backgroundColor}
+                onChange={(event) => setBackgroundColor(event.target.value)}
+              >
+                <option value="Sand">Sand</option>
+                <option value="Sage">Sage</option>
+                <option value="Charcoal">Charcoal</option>
+                <option value="Cloud">Cloud</option>
+                <option value="Blush">Blush</option>
+                <option value="Taupe">Taupe</option>
+              </select>
+            </label>
+            <label>
+              Specialty background
+              <select
+                value={backgroundSpecialty}
+                onChange={(event) =>
+                  setBackgroundSpecialty(event.target.value)
+                }
+              >
+                <option value="None">None</option>
+                <option value="Space">Space</option>
+                <option value="Gold">Gold</option>
+                <option value="Zebra">Zebra</option>
+                <option value="Cheetah">Cheetah</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Ocean">Ocean</option>
+              </select>
+            </label>
+          </div>
+        ) : null}
       </main>
     </div>
   )
